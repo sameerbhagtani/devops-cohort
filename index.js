@@ -5,7 +5,7 @@ const PORT = process.env.PORT ?? 3000;
 
 app.get("/", (req, res) => {
     return res.json({
-        message: "Server is healthy (github actions) docker 🐋",
+        message: "Server is healthy (github actions) docker 🐋. SSL testing.",
     });
 });
 
