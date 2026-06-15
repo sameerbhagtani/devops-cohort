@@ -37,10 +37,14 @@ jobs:
                   username: ubuntu
                   key: ${{ secrets.PRIVATE_KEY }}
                   script: |
-                      export NVM_DIR="$HOME/.nvm"
-                      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                      # Kill the exiting docker container
+                      sudo docker rm -f devops-cohort || true
 
-                      cd /home/ubuntu/devops-cohort
-                      git pull
-                      pnpm i
-                      pm2 restart 0
+                      # Pull the fresh image from the hub
+                      sudo docker pull sameerbhagtani/devops-cohort
+
+                      # Run the container
+                      sudo docker run -d --name devops-cohort --restart unless-stopped -p 3000:3000 sameerbhagtani/devops-cohort
+
+                      # Clean up old/unused images
+                      sudo docker image prune -f
