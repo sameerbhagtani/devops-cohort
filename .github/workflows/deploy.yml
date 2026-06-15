@@ -37,14 +37,14 @@ jobs:
                   username: ubuntu
                   key: ${{ secrets.PRIVATE_KEY }}
                   script: |
-                      # Kill the exiting docker container
-                      sudo docker rm -f devops-cohort || true
+                      # CD
+                      cd /home/ubuntu/devops-cohort
+                      git pull origin main
 
-                      # Pull the fresh image from the hub
-                      sudo docker pull sameerbhagtani/devops-cohort
+                      # pull a fresh copy of sameerbhagtani/devops-cohort
+                      sudo docker compose pull
 
-                      # Run the container
-                      sudo docker run -d --name devops-cohort --restart unless-stopped -p 80:3000 sameerbhagtani/devops-cohort
+                      sudo docker compose up -d
 
                       # Clean up old/unused images
                       sudo docker image prune -f
