@@ -44,7 +44,7 @@ jobs:
                       sudo docker pull sameerbhagtani/devops-cohort
 
                       # Run the container
-                      sudo docker run -d --name devops-cohort --restart unless-stopped -p 3000:3000 sameerbhagtani/devops-cohort
+                      sudo docker run -d --name devops-cohort --restart unless-stopped -p 80:3000 sameerbhagtani/devops-cohort
 
                       # Clean up old/unused images
                       sudo docker image prune -f
